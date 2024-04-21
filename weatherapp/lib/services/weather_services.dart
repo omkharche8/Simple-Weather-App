@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weatherapp/models/weather_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as https;
 
 class WeatherService {
-  static const BASE_URL = 'http://api.openweathermap.org/data/2.5/weather';
+  static const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
   final String apiKey;
 
   WeatherService(this.apiKey);
 
   Future<Weather> getWeather(String cityName) async {
-    final response = await http
+    final response = await https
         .get(Uri.parse('$BASE_URL?q=$cityName&appid=$apiKey&units=metric'));
 
     if (response.statusCode == 200) {
